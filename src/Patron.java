@@ -14,7 +14,6 @@ public class Patron {
         return id;
     }
     public String getPatronInformation(){
-        //return name + " " + address + " " + fineAmount + " " + id + "\n";
         return "Id: " + id + " Name: " + name + " Address: " + address + " Fine Amount: " + fineAmount;
     }
 }
