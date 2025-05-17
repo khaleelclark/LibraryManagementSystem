@@ -1,3 +1,12 @@
+/**
+ * Khaleel Zindel Clark
+ * CEN 3024 - Software Development 1
+ * May 18, 2025
+ * Patron.java
+ * This class creates a patron object with the attributes
+ * id, name, address, and fine amount
+ */
+
 public class Patron {
     private final String id;
     private final String name;
@@ -10,10 +19,24 @@ public class Patron {
         this.address = address;
         this.fineAmount = fineAmount;
     }
+
+    /**
+     * method: getId
+     * parameters: none
+     * return: void
+     * purpose: this method is a getter to retrieve the id of a patron
+     */
     public String getId() {
         return id;
     }
-    public String getPatronInformation(){
+
+    /**
+     * method: getPatronInformation
+     * parameters: none
+     * return: String
+     * purpose: this method returns patron attribute information in a formatted string
+     */
+    public String getPatronInformation() {
         return "Id: " + id + " Name: " + name + " Address: " + address + " Fine Amount: " + fineAmount;
     }
 }
