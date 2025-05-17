@@ -17,10 +17,22 @@ import java.util.Scanner;
 public class LibraryManagementSystem {
     private final static List<Patron> patronList = new ArrayList<>();
 
+    /**
+     * method: startLMS
+     * parameters: none
+     * return: void
+     * purpose: runs the functions of the LMS based off the user's input
+     */
     public static void main(String[] args) {
         startLMS();
     }
 
+    /**
+     * method: startLMS
+     * parameters: none
+     * return: void
+     * purpose: runs the functions of the LMS based off the user's input
+     */
     public static void startLMS() {
         while (true) {
             System.out.println("\nWelcome to Zindel's LMS!\nPlease enter the number of the option you wish to select\n");
@@ -57,6 +69,13 @@ public class LibraryManagementSystem {
         }
     }
 
+    /**
+     * method: addPatronFromFile
+     * parameters: none
+     * return: void
+     * purpose: this method prompts the user for the path of the file they wish to use to load the LMS,
+     * and then it adds the Patrons to the Patron list
+     */
     public static void addPatronFromFile() {
         Scanner userInput = new Scanner(System.in);
         System.out.println("""
@@ -71,7 +90,7 @@ public class LibraryManagementSystem {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
             System.err.println("Error opening file: " + e.getMessage());
-            return; // exit if file isn't found
+            return;
         }
 
         int line = 1;
@@ -99,10 +118,12 @@ public class LibraryManagementSystem {
                     patronList.add(new Patron(id, name, address, fineAmount));
 
                 } catch (NumberFormatException e) {
-                    System.err.println("Error on line " + line + ": Invalid fine format! " + e.getMessage() + "\n    Fine amount must be a number between 0-250 to be valid\n");
+                    System.err.println("Error on line " + line + ": Invalid fine format! " + e.getMessage() +
+                            "\n    Fine amount must be a number between 0-250 to be valid\n");
                 }
             } else {
-                System.err.println("Error on line " + line + ": Invalid line format! Too many or too little columns, please correct.\n    File must have 4 columns seperated by a dash. Ex. Id - Name - Address - Fine Amount\n");
+                System.err.println("Error on line " + line + ": Invalid line format! Too many or too little columns, please correct.\n" +
+                        "    File must have 4 columns seperated by a dash. Ex. Id - Name - Address - Fine Amount\n");
             }
             line++;
         }
@@ -110,6 +131,12 @@ public class LibraryManagementSystem {
         displayAllPatrons();
     }
 
+    /**
+     * method: addPatronManually
+     * parameters: none
+     * return: void
+     * purpose: this method allows the user to manually add a Patron to the patron list by inputting a patrons attributes
+     */
     public static void addPatronManually() {
         Scanner scanner = new Scanner(System.in);
         String name;
@@ -170,6 +197,13 @@ public class LibraryManagementSystem {
 
     }
 
+    /**
+     * method: generateId
+     * parameters: none
+     * return: String uniqueId
+     * purpose: This method creates a random seven-digit number and checks if it already exists for a patron.
+     * If it does, the method recursively generates a new id until a unique one is found.
+     */
     public static String generateId() {
         Random random = new Random();
         String uniqueId = String.valueOf(1000000 + random.nextInt(9000000));
@@ -177,6 +211,13 @@ public class LibraryManagementSystem {
         else return generateId();
     }
 
+    /**
+     * method: removePatron
+     * parameters: none
+     * return: void
+     * purpose: this method displays all patrons then prompts the user to input the id of the patron they would like to remove
+     * then it prompts a confirmation message and removes a patron from the patron list or cancels the operation.
+     */
     public static void removePatron() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the Id of the Patron you'd like to remove");
@@ -209,6 +250,12 @@ public class LibraryManagementSystem {
         }
     }
 
+    /**
+     * method: getPatronById
+     * parameters: String id
+     * return: Patron
+     * purpose: this method returns the patron with the id that matches the id parameter
+     */
     public static Patron getPatronById(String id) {
         for (Patron patron : patronList) {
             if (patron.getId().equals(id)) {
@@ -218,6 +265,12 @@ public class LibraryManagementSystem {
         return null;
     }
 
+    /**
+     * method: displayAllPatrons
+     * parameters: none
+     * return: void
+     * purpose: this method prints out the patron list to the screen
+     */
     public static void displayAllPatrons() {
         if (!patronList.isEmpty()) {
             System.out.println("Patrons: ");
